@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @MapperScan
-@ComponentScan({"com.fehead.inquiry", "com.fehead.lang"})
+@ComponentScan({"com.fehead.lang", "com.fehead.inquiry"})
 public class App 
 {
     public static void main( String[] args )

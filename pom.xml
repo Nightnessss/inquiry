@@ -72,7 +72,7 @@
         <configuration>
           <fork>true</fork> <!-- 如果没有该配置，devtools不会生效 -->
           <!-- 指定该Main Class为全局的唯一入口 -->
-          <mainClass>com.fehead.inquiry.InquiryApp</mainClass>
+          <mainClass>com.fehead.inquiry.App</mainClass>
           <!--                    <layout>ZIP</layout>-->
         </configuration>
         <executions>

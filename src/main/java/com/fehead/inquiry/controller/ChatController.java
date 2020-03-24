@@ -2,10 +2,7 @@ package com.fehead.inquiry.controller;
 
 import com.fehead.lang.controller.BaseController;
 import com.fehead.lang.response.CommonReturnType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 写代码 敲快乐

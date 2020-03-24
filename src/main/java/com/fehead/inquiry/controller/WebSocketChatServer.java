@@ -17,10 +17,7 @@ import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -60,15 +57,20 @@ public class WebSocketChatServer {
     }
 
     @OnMessage
-    public void onMessage(Session session, String jsonStr) throws BusinessException, IOException {
+    public void onMessage(@PathParam("userId") String userId, Session session, String jsonStr) throws BusinessException, IOException {
         if (StringUtils.isEmpty(jsonStr)) {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         MessageDO message = JSONObject.parseObject(jsonStr, MessageDO.class);
+        message.setUserId(userId);
+        message.setTime(new Date());
+        logger.info(message.toString());
         if (message.getType() == MessageDO.PIC) {
             String postRet = HttpClientUtil.filePost(URL, Base64Str2MultipartFile(message.getContent()));
             JSONObject jsonObject = JSON.parseObject(postRet);
-            message.setContent((String) jsonObject.get("url"));
+            JSONObject data = (JSONObject) jsonObject.get("data");
+
+            message.setContent((String) data.get("url"));
         }
 
         List<String> toUsers = new ArrayList<>();
@@ -82,6 +84,7 @@ public class WebSocketChatServer {
     @OnClose
     public void onClose(@PathParam("userId") String userId, Session session) {
         chatSessions.remove(userId);
+        logger.info(userId + "连接关闭");
     }
 
     @OnError

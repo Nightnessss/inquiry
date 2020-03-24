@@ -80,7 +80,7 @@ public class WebSocketChatServer {
     }
 
     @OnClose
-    public void onClose(Session session, String userId) {
+    public void onClose(@PathParam("userId") String userId, Session session) {
         chatSessions.remove(userId);
     }
 

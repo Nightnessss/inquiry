@@ -116,7 +116,6 @@ public class WebSocketChatServer {
     private static MultipartFile Base64Str2MultipartFile(String base64Data) throws BusinessException {
         if (org.apache.commons.lang3.StringUtils.isEmpty(base64Data)) {
         }
-        System.out.println("==接收到的数据=="+base64Data);
         //base64格式前头
         String dataPrix = "";
         //实体部分数据
